@@ -1,0 +1,93 @@
+# peek-kit Audit: {{ app_name }}
+**Analyzed:** {{ report.analysis_date }}  |  **Coverage:** {{ report.coverage_level }}  |  **Auth tier:** {{ report.exploration_coverage.auth_tier }}
+
+## Executive Summary
+{{ report.executive_summary }}
+
+## UX Scorecard
+| Dimension | Score | Rationale |
+|-----------|-------|-----------|
+| Learnability | {{ report.scorecard.learnability }}/5 | - |
+| Efficiency | {{ report.scorecard.efficiency }}/5 | - |
+| Error Prevention | {{ report.scorecard.error_prevention }}/5 | - |
+| Feedback | {{ report.scorecard.feedback }}/5 | - |
+| Consistency | {{ report.scorecard.consistency }}/5 | - |
+| Accessibility | {{ report.scorecard.accessibility }}/5 | - |
+| Visual Hierarchy | {{ report.scorecard.visual_hierarchy }}/5 | - |
+| Error Recovery | {{ report.scorecard.error_recovery }}/5 | - |
+| **Overall Score** | **{{ report.scorecard.overall_score }}/5** | {{ report.scorecard.rationale }} |
+
+## Feature Inventory
+{% for category in report.feature_inventory.categories %}
+**{{ category.category_name }}**
+{% for feature in category.features %}
+- {{ feature.name }}: {{ feature.description }} (Path: {{ feature.access_path }}, Availability: {{ feature.availability }})
+{% endfor %}
+{% endfor %}
+
+## Flow Map
+```
+{{ report.flow_map }}
+```
+
+## What They Do Well
+{% for item in report.what_they_do_well %}
+### {{ item.title }}
+{% if item.artifact_reference %}
+![Image]({{ item.artifact_reference }})
+{% endif %}
+{{ item.explanation }}
+*Why it's good:* {{ item.why_good }}
+{% endfor %}
+
+## What Needs Work
+{% for finding in report.what_needs_work %}
+**[{{ finding.severity|upper }}]** {{ finding.title }}
+*Screens:* {{ finding.screens | join(', ') }}
+{% if finding.artifact_reference %}
+![Screenshot]({{ finding.artifact_reference }})
+{% endif %}
+{{ finding.description }}
+*Recommendation:* {{ finding.recommendation }}
+*Effort:* {{ finding.effort }}
+{% endfor %}
+
+## Secret Sauce
+{% for item in report.secret_sauce %}
+### {{ item.name }}
+{% if item.artifact_reference %}
+![Image]({{ item.artifact_reference }})
+{% endif %}
+{{ item.description }}
+*Why users love it:* {{ item.why_users_love_it }}
+*Replication effort:* {{ item.replication_effort }}
+{% endfor %}
+
+## Design Philosophy
+{{ report.design_philosophy }}
+
+## Monetization & Conversion Patterns
+{{ report.monetization_patterns }}
+
+## Accessibility Assessment
+- **Keyboard Navigation:** {{ report.accessibility.keyboard_navigation }}
+- **Label Quality:** {{ report.accessibility.label_quality }}
+- **Contrast Issues:** {{ report.accessibility.contrast_issues }}
+- **API Gaps:** {{ report.accessibility.api_gaps }}
+- **Overall Impression:** {{ report.accessibility.overall_impression }}
+
+## Exploration Coverage
+**Visited:**
+{% for screen in report.exploration_coverage.screens_visited %}
+- {{ screen }}
+{% endfor %}
+
+**Not Reached:**
+{% for screen in report.exploration_coverage.screens_not_reached %}
+- {{ screen }}
+{% endfor %}
+
+## Appendix: Raw Feature Map (JSON)
+```json
+{{ report.feature_inventory.model_dump_json(indent=2) }}
+```

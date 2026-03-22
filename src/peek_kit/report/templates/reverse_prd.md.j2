@@ -1,0 +1,80 @@
+# peek-kit Reverse-PRD: {{ app_name }}
+**Generated from audit:** {{ prd.audit_filename }}  |  **Date:** {{ prd.timestamp }}
+
+## Product Overview
+{{ prd.product_overview }}
+
+## Target User Personas
+{% for persona in prd.target_personas %}
+### {{ persona.name }} ({{ persona.role }})
+- **Job to be done:** {{ persona.job_to_be_done }}
+- **Pain points:** {{ persona.pain_points | join(', ') }}
+- **Key features used:** {{ persona.key_features | join(', ') }}
+{% endfor %}
+
+## Core Value Proposition
+{% for vp in prd.core_value_proposition %}
+### Bet: {{ vp.bet }}
+- **Evidence from UI:** {{ vp.ui_evidence }}
+- **Effort to replicate:** {{ vp.replication_effort }}
+{% endfor %}
+
+## Epics and User Stories
+{% for epic in prd.epics %}
+### {{ epic.name }}
+{{ epic.description }}
+
+{% for story in epic.stories %}
+#### As a {{ story.persona }}, I want to {{ story.action }} so that {{ story.outcome }}
+**Acceptance criteria:**
+{% for ac in story.acceptance_criteria %}
+- {{ ac.description }}
+{% endfor %}
+{% if story.technical_notes %}
+**Technical notes:** {{ story.technical_notes }}
+{% endif %}
+{% endfor %}
+{% endfor %}
+
+## Information Architecture
+{% for group in prd.information_architecture %}
+- **{{ group.name }}**: {{ group.items | join(', ') }}
+{% endfor %}
+
+## Key Screens and Their Purpose
+{% for screen in prd.key_screens %}
+### {{ screen.name }}
+- **User intent:** {{ screen.user_intent }}
+- **Key elements:** {{ screen.key_elements | join(', ') }}
+- **Primary action:** {{ screen.primary_action }}
+- **Secondary actions:** {{ screen.secondary_actions | join(', ') }}
+{% endfor %}
+
+## Data Model (Inferred)
+{% for entity in prd.data_model %}
+**{{ entity.name }}**
+{% for attr in entity.attributes %}
+- {{ attr.name }} ({{ attr.type }})
+{% endfor %}
+{% endfor %}
+
+## What to Replicate vs. Improve
+**Replicate:**
+{% for item in prd.what_to_replicate %}
+- {{ item }}
+{% endfor %}
+
+**Improve:**
+{% for item in prd.what_to_improve %}
+- {{ item }}
+{% endfor %}
+
+## Out of Scope / Explicitly Excluded
+{% for item in prd.out_of_scope %}
+- {{ item }}
+{% endfor %}
+
+## Open Questions
+{% for q in prd.open_questions %}
+- {{ q }}
+{% endfor %}
