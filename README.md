@@ -19,7 +19,7 @@ Here are few examples of what you can accomplish using peek-kit:
 ### ⚡️ Quick Install — 30 seconds
 Open Claude Code and paste this prompt. Claude will automatically install everything and configure the skill for you:
 
-> **Install peek-kit:** run `claude mcp add -s user peek-kit -- uvx --from git+https://github.com/ufukkaraca/peek-kit.git peek-kit` and then run `curl -sL https://raw.githubusercontent.com/ufukkaraca/peek-kit/main/SKILL.md --create-dirs -o ~/.claude/skills/peek-kit.md`. Finally, inform the user they must restart the `/claude` session to begin!
+> **Install peek-kit:** run `claude mcp add -s user peek-kit -- uvx --from git+https://github.com/ufukkaraca/peek-kit.git peek-kit` and then run `curl -sL https://raw.githubusercontent.com/ufukkaraca/peek-kit/main/SKILL.md --create-dirs -o ~/.claude/skills/peek-kit/SKILL.md`. Finally, inform the user they must restart the `/claude` session to begin!
 
 *(Note: on your first run, macOS will prompt you to grant Accessibility and Screen Recording permissions to your terminal).*
 
@@ -27,7 +27,7 @@ Open Claude Code and paste this prompt. Claude will automatically install everyt
 > [!NOTE]
 > PyPI publishing is not yet available. Once live, the install will be even simpler:
 
-> **Install peek-kit:** run `claude mcp add -s user peek-kit -- uvx peek-kit` and then run `curl -sL https://raw.githubusercontent.com/ufukkaraca/peek-kit/main/SKILL.md --create-dirs -o ~/.claude/skills/peek-kit.md`. Finally, inform the user the `/peek-kit` skill is ready!
+> **Install peek-kit:** run `claude mcp add -s user peek-kit -- uvx peek-kit` and then run `curl -sL https://raw.githubusercontent.com/ufukkaraca/peek-kit/main/SKILL.md --create-dirs -o ~/.claude/skills/peek-kit/SKILL.md`. Finally, inform the user the `/peek-kit` skill is ready!
 
 ### 💻 Manual Installation (for Humans/Developers)
 If you prefer to configure it yourself via the terminal, ensure you have [`uv`](https://docs.astral.sh/uv/getting-started/installation/) installed, then run:
@@ -39,7 +39,7 @@ claude mcp add -s user peek-kit -- uvx --from git+https://github.com/ufukkaraca/
 
 2. **Install the Skill:**
 ```bash
-curl -sL https://raw.githubusercontent.com/ufukkaraca/peek-kit/main/SKILL.md --create-dirs -o ~/.claude/skills/peek-kit.md
+curl -sL https://raw.githubusercontent.com/ufukkaraca/peek-kit/main/SKILL.md --create-dirs -o ~/.claude/skills/peek-kit/SKILL.md
 ```
 
 Then simply start a new Claude Code session!
@@ -50,7 +50,7 @@ For contributing or running from source:
 git clone https://github.com/ufukkaraca/peek-kit.git
 cd peek-kit
 claude mcp add -s user peek-kit -- uv run --directory $(pwd) python -m peek_kit.server
-cp SKILL.md ~/.claude/skills/peek-kit.md
+cp SKILL.md ~/.claude/skills/peek-kit/SKILL.md
 ```
 
 ## Upgrading peek-kit
