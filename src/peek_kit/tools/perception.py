@@ -8,7 +8,7 @@ from peek_kit.bridge.screenshot import take_screenshot as _take_screenshot
 from peek_kit.bridge.menu import get_menu_structure as _get_menu_structure
 
 def register_perception_tools(mcp: FastMCP):
-    @mcp.tool()
+    @mcp.tool(structured_output=False)
     def get_peek_kit_version() -> str:
         """Returns the current installed version of peek-kit."""
         from importlib.metadata import version, PackageNotFoundError
@@ -17,23 +17,23 @@ def register_perception_tools(mcp: FastMCP):
         except PackageNotFoundError:
             return "unknown"
 
-    @mcp.tool()
+    @mcp.tool(structured_output=False)
     def check_system_permissions() -> dict:
         """Checks if the MCP server has macOS Accessibility and Screen Recording permissions."""
         from peek_kit.utils.permissions import check_all_permissions
         return check_all_permissions()
 
-    @mcp.tool()
+    @mcp.tool(structured_output=False)
     def list_running_apps() -> List[AppInfo]:
         """List all currently running apps with their bundle IDs and window counts."""
         return _list_running_apps()
 
-    @mcp.tool()
+    @mcp.tool(structured_output=False)
     def get_accessibility_tree(app_name: str, max_depth: int = 8, include_invisible: bool = False) -> AccessibilityTree:
         """Extracts the full accessibility element hierarchy for the target application."""
         return extract_tree(app_name, max_depth, include_invisible)
 
-    @mcp.tool()
+    @mcp.tool(structured_output=False)
     def take_screenshot(app_name: str, annotated: bool = True, window_index: int = 0) -> Screenshot:
         """Captures the current state of the target app window."""
         tree = extract_tree(app_name) if annotated else None
@@ -42,12 +42,12 @@ def register_perception_tools(mcp: FastMCP):
             raise Exception("Failed to take screenshot.")
         return res
 
-    @mcp.tool()
+    @mcp.tool(structured_output=False)
     def get_menu_structure(app_name: str) -> MenuTree:
         """Enumerates the full menu bar hierarchy for the application."""
         return _get_menu_structure(app_name)
 
-    @mcp.tool()
+    @mcp.tool(structured_output=False)
     def get_current_state(app_name: str) -> AppState:
         """Returns accessibility tree + annotated screenshot in one call."""
         tree = extract_tree(app_name)
@@ -56,7 +56,7 @@ def register_perception_tools(mcp: FastMCP):
             raise Exception("Failed to capture screenshot for state.")
         return AppState(tree=tree, screenshot=screenshot)
 
-    @mcp.tool()
+    @mcp.tool(structured_output=False)
     def find_elements(app_name: str, role: Optional[str] = None, text: Optional[str] = None, enabled_only: bool = True) -> List[Element]:
         """Searches the accessibility tree for elements matching a query."""
         tree = extract_tree(app_name)
