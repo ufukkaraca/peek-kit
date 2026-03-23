@@ -14,9 +14,10 @@ def check_accessibility_permissions(prompt: bool = False) -> bool:
 
 def require_accessibility():
     if not check_accessibility_permissions():
-        print("Accessibility permission is required to run peek-kit.")
-        print("Please enable it in System Settings > Privacy & Security > Accessibility.")
-        print("Grant access to your terminal application (e.g. Terminal, iTerm2).")
+        # Use stderr to avoid corrupting MCP stdio transport on stdout
+        print("Accessibility permission is required to run peek-kit.", file=sys.stderr)
+        print("Please enable it in System Settings > Privacy & Security > Accessibility.", file=sys.stderr)
+        print("Grant access to your terminal application (e.g. Terminal, iTerm2).", file=sys.stderr)
         sys.exit(1)
 
 def check_all_permissions() -> dict:

@@ -13,7 +13,7 @@ from peek_kit.utils.auth_detection import is_auth_wall
 _resume_event = asyncio.Event()
 _user_note: Optional[str] = None
 _timeout_expired = False
-console = Console()
+console = Console(stderr=True)
 
 def get_timeout_expired() -> bool:
     return _timeout_expired

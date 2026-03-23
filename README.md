@@ -24,10 +24,9 @@ Open Claude Code and paste this prompt. Claude will automatically install everyt
 *(Note: on your first run, macOS will prompt you to grant Accessibility and Screen Recording permissions to your terminal).*
 
 ### 📦 Installing from PyPI (Coming Soon)
-> [!WARNING]
-> `pip install peek-kit` will only be available once the author recovers their PyPI account password.
+> [!NOTE]
+> PyPI publishing is not yet available. Once live, the install will be even simpler:
 
-Once live, the AI prompt will be even simpler:
 > **Install peek-kit:** run `claude mcp add -s user peek-kit -- uvx peek-kit` and then run `curl -sL https://raw.githubusercontent.com/ufukkaraca/peek-kit/main/SKILL.md --create-dirs -o ~/.claude/skills/peek-kit.md`. Finally, inform the user the `/peek-kit` skill is ready!
 
 ### 💻 Manual Installation (for Humans/Developers)
@@ -50,16 +49,12 @@ For contributing or running from source:
 ```bash
 git clone https://github.com/ufukkaraca/peek-kit.git
 cd peek-kit
-claude mcp add -s user peek-kit -- uv run --directory $(pwd) peek_kit/server.py
+claude mcp add -s user peek-kit -- uv run --directory $(pwd) python -m peek_kit.server
 cp SKILL.md ~/.claude/skills/peek-kit.md
 ```
 
 ## Upgrading peek-kit
-To install the latest features and updates from PyPI, simply run:
-```bash
-pip install --upgrade peek-kit
-```
-After updating, you may need to restart your Claude Code instance.
+If you installed via the Quick Install method, simply re-run the install command to get the latest version from GitHub. After updating, restart your Claude Code session.
 
 ## Source Attributions & License
 This project is open-source under the MIT License (see `LICENSE` file).
@@ -68,6 +63,7 @@ peek-kit stands on the shoulders of several incredible open-source libraries. We
 - [Model Context Protocol (MCP)](https://github.com/modelcontextprotocol): The foundational SDK enabling Claude to interface with this tool.
 - [atomacos](https://github.com/vmdv/atomacos): The robust wrapper around macOS Accessibility APIs that makes UI enumeration and interaction possible.
 - [pyobjc](https://github.com/ronaldoussoren/pyobjc): The essential bridge connecting Python to native macOS Cocoa and Quartz frameworks.
+- [PyAutoGUI](https://github.com/asweigart/pyautogui): Enabling smooth mouse movement for visual click feedback.
 - [Pillow](https://python-pillow.org/): Driving the image processing and annotation for our screenshots.
 - [pydantic](https://docs.pydantic.dev/): Securing strict schema layouts for final JSON and Markdown reporting.
 - [Jinja2](https://palletsprojects.com/p/jinja/): Powering the dynamic Markdown report templates.
